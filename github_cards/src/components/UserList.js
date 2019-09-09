@@ -1,27 +1,33 @@
-import React from "react"
+import React, {Component} from "react"
+import UserCard from "./UserCard.js"
 
 
-class UserList extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-        users: []
-    }}
+class UserList extends Component {
 
-    componentDidMount() {
-        fetch("https://api.github.com/users/aidenbow")
-        .then(res => res.json())
-            .then(res => {
-                console.log(res)
-                this.setState({users: res})
-                console.log(this.state)
-            })
+        state = {
+            users: ["first item"],
+            usernames: ["aidenbow", "lilvina"]
+        }
+
+    componentDidMount() {       
+        this.state.usernames.map(name => {
+                fetch(`https://api.github.com/users/${name}`)
+                .then(res => {
+                    this.setState({users: [...this.state.users, res]})
+                    console.log(this.state.users)})
+                .catch(err => err)
+                return console.log(this.state.users)
+        })
+
+        //setInterval(() => { console.log(this.state.users)}, 2000)
+        
     }
+    
 
     render() {
         return (
             <div>
-                <p>dawawd</p>
+                <UserCard />
             </div>
         )
 
@@ -29,4 +35,4 @@ class UserList extends React.Component {
     }
 }
 
-export default UserList
+export default UserList;
