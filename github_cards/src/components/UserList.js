@@ -1,17 +1,17 @@
 import React, {Component} from "react"
 import UserCard from "./UserCard.js"
 
-
 class UserList extends Component {
 
         state = {
-            users: ["first item"],
-            usernames: ["aidenbow", "lilvina"]
+            users: [],
+            usernames: ["aidenbow", "lilvina", "jacobangulo"]
         }
 
     componentDidMount() {       
         this.state.usernames.map(name => {
                 fetch(`https://api.github.com/users/${name}`)
+                .then(res => res.json())
                 .then(res => {
                     this.setState({users: [...this.state.users, res]})
                     console.log(this.state.users)})
@@ -26,8 +26,10 @@ class UserList extends Component {
 
     render() {
         return (
-            <div>
-                <UserCard />
+            <div className="App-header">
+                {this.state.users.map(user => {
+                    return <UserCard key={user.id} user={user} />
+                })}
             </div>
         )
 
