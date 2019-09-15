@@ -2,12 +2,13 @@ import React, {Component} from "react"
 import UserCard from "./UserCard.js"
 
 class UserList extends Component {
-
-        state = {
+    constructor(){
+        super();
+        this.state = {
             users: [],
-            usernames: ["aidenbow", "lilvina", "jacobangulo"]
+            usernames: ["aidenbow", "lilvina", "jacobangulo", "Nebadon1", "jalvarez2020", "lizdoyle"]
         }
-
+    }
     componentDidMount() {       
         this.state.usernames.map(name => {
                 fetch(`https://api.github.com/users/${name}`)

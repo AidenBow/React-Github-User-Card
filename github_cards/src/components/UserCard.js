@@ -12,8 +12,9 @@ class UserCard extends React.Component {
     render() {
         return (
             <div>
-                <p>{this.props.user.login}</p>
+                <p className="App-logo">{this.props.user.login}</p>
                 <img className="App-logo" src={this.props.user.avatar_url} alt="avatar"/>
+                <p className="App-logo">{this.props.user.location}</p>
             </div>
         )
 
